@@ -9,57 +9,49 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 st.set_page_config(page_title="DermaScan AI | Lesion Analysis", page_icon="⚕️", layout="centered")
 
 # Use a high-tech, clean medical theme
-# High-Tech Medical Background with Floating Equipment
+# High-Density Floating Medical Equipment Field
 st.markdown("""
     <style>
     .stApp {
-        background-color: #f8fafc; /* Professional clinical white */
+        background-color: #f0f4f8; 
     }
 
-    /* Force all text to be crisp and readable */
+    /* Keep text sharp and high-contrast */
     h1, h2, h3, p, b, span, div.stMarkdown {
-        color: #1e293b !important; 
-        text-shadow: 0px 0px 1px rgba(255,255,255,0.8);
+        color: #051937 !important;
+        position: relative;
+        z-index: 10; /* Ensures text stays ABOVE the floating icons */
     }
 
-    /* Animation for floating equipment */
-    @keyframes float-slow {
-        0% { transform: translate(0, 0) rotate(0deg); }
-        50% { transform: translate(15px, -25px) rotate(5deg); }
-        100% { transform: translate(0, 0) rotate(0deg); }
-    }
+    /* Floating Animation Variations */
+    @keyframes drift-1 { 0% { transform: translate(0,0); } 100% { transform: translate(30px, 40px); } }
+    @keyframes drift-2 { 0% { transform: translate(0,0); } 100% { transform: translate(-40px, 20px); } }
 
-    @keyframes pulse {
-        0% { opacity: 0.1; transform: scale(1); }
-        100% { opacity: 0.2; transform: scale(1.1); }
-    }
-
-    .med-equip {
+    .med-field {
         position: fixed;
         z-index: 0;
-        opacity: 0.12; /* Keeps them subtle but visible */
-        filter: grayscale(20%);
-        animation: float-slow 8s infinite ease-in-out;
+        opacity: 0.18; /* Increased opacity as requested */
         user-select: none;
+        pointer-events: none; /* Icons won't block mouse clicks */
     }
 
-    /* Style the result cards to pop over the background */
-    div[data-testid="stVerticalBlock"] > div:has(div.stMetric) {
-        background-color: #ffffff;
-        border: 2px solid #e2e8f0;
-        box-shadow: 10px 10px 25px rgba(0,0,0,0.03);
+    /* Clean white cards to separate UI from background */
+    [data-testid="stVerticalBlock"] > div:has(div.stMetric) {
+        background-color: rgba(255, 255, 255, 0.95);
+        border: 1px solid #d1d9e6;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
     </style>
+
+    <div class="med-field" style="top: 5%; left: 2%; font-size: 70px; animation: drift-1 10s infinite alternate;">🔬</div>
+    <div class="med-field" style="top: 25%; left: 15%; font-size: 40px; animation: drift-2 7s infinite alternate;">🧬</div>
+    <div class="med-field" style="top: 50%; left: 5%; font-size: 60px; animation: drift-1 12s infinite alternate;">🩺</div>
+    <div class="med-field" style="bottom: 10%; left: 12%; font-size: 55px; animation: drift-2 8s infinite alternate;">🏥</div>
+    <div class="med-field" style="bottom: 30%; left: 2%; font-size: 45px; animation: drift-1 9s infinite alternate;">💊</div>
     
-    <div class="med-equip" style="top: 10%; left: 3%; font-size: 80px;">🔬</div>
-    <div class="med-equip" style="top: 40%; left: 8%; font-size: 50px; animation-duration: 10s;">🧬</div>
-    <div class="med-equip" style="bottom: 15%; left: 5%; font-size: 70px; animation-duration: 7s;">🩺</div>
-    
-    <div class="med-equip" style="top: 15%; right: 5%; font-size: 60px; animation-duration: 9s;">🏥</div>
-    <div class="med-equip" style="top: 50%; right: 7%; font-size: 90px; opacity: 0.08;">🩻</div>
-    <div class="med-equip" style="bottom: 20%; right: 4%; font-size: 55px; animation-duration: 11s;">💊</div>
-    <div class="med-equip" style="bottom: 5%; right: 45%; font-size: 40px; animation: pulse 4s infinite alternate;">❤️‍🩹</div>
-    """, unsafe_allow_html=True)
+    <div class="med-field" style="top: 8%; right: 10%; font-size: 50px; animation: drift-2 11
 # 3. Build the UI Layout
 st.title("🏥 DermaScan AI")
 st.subheader("Automated Skin Lesion Pre-Screening Tool")
