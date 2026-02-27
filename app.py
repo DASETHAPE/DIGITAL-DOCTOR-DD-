@@ -65,6 +65,11 @@ st.markdown("""
     <div class="float-item" style="top: 40%; right: 10%; font-size: 100px; animation-delay: -1s;">🩹</div>
     <div class="float-item" style="bottom: 5%; right: 3%; font-size: 85px;">🚑</div>
     <div class="float-item" style="bottom: 45%; right: 15%; font-size:
+
+    <div class="float-item" style="top: 10%; right: 5%; font-size: 75px;">🩻</div>
+    <div class="float-item" style="top: 40%; right: 10%; font-size: 100px; animation-delay: -1s;">🩹</div>
+    <div class="float-item" style="bottom: 5%; right: 3%; font-size: 85px;">🚑</div>
+    <div class="float-item" style="bottom: 45%; right: 15%; font-size:
     """, unsafe_allow_html=True)
 # 3. Build the UI Layout
 st.title("🏥 DermaScan AI")
