@@ -8,48 +8,57 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 # 1. Configure the page settings
 st.set_page_config(page_title="DermaScan AI | Lesion Analysis", page_icon="⚕️", layout="centered")
 
-# Use a high-tech, clean medical theme (Copy and Paste this)
+# Use a high-tech, clean medical theme
+# High-Tech Medical Background with Floating Equipment
 st.markdown("""
     <style>
-    /* 1. Base App Styling */
     .stApp {
-        background-color: #f0f4f8; /* Crisp, clean white background */
+        background-color: #f8fafc; /* Professional clinical white */
     }
 
-    /* 2. Style all text to be sharp and black */
-    h1, h2, h3, p, span, li, div.stMarkdown, div[data-testid="stMetricValue"] {
-        color: #000000 !important; /* Forces all text to be pure, readable black */
-        font-family: 'Inter', sans-serif;
+    /* Force all text to be crisp and readable */
+    h1, h2, h3, p, b, span, div.stMarkdown {
+        color: #1e293b !important; 
+        text-shadow: 0px 0px 1px rgba(255,255,255,0.8);
     }
 
-    /* 3. Style the Containers (Cards) with NO BLUR */
-    div[data-testid="stVerticalBlock"] > div:has(div.stMetric) {
-        background-color: #ffffff; /* Solid white background, no transparency */
-        padding: 20px;
-        border-radius: 12px;
-        border: 1px solid #e0e6ed;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Soft, professional shadow */
+    /* Animation for floating equipment */
+    @keyframes float-slow {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        50% { transform: translate(15px, -25px) rotate(5deg); }
+        100% { transform: translate(0, 0) rotate(0deg); }
     }
 
-    /* 4. The Floating Medical Icons (Keeping them behind the text) */
-    @keyframes move {
-        from { transform: translateY(0) rotate(0deg); }
-        to { transform: translateY(-30px) rotate(10deg); }
+    @keyframes pulse {
+        0% { opacity: 0.1; transform: scale(1); }
+        100% { opacity: 0.2; transform: scale(1.1); }
     }
 
-    .med-icon {
+    .med-equip {
         position: fixed;
-        opacity: 0.1; /* Very subtle so it doesn't distract */
         z-index: 0;
-        animation: move 5s infinite alternate ease-in-out;
-        color: #d1212c; /* Clinical red */
+        opacity: 0.12; /* Keeps them subtle but visible */
+        filter: grayscale(20%);
+        animation: float-slow 8s infinite ease-in-out;
+        user-select: none;
+    }
+
+    /* Style the result cards to pop over the background */
+    div[data-testid="stVerticalBlock"] > div:has(div.stMetric) {
+        background-color: #ffffff;
+        border: 2px solid #e2e8f0;
+        box-shadow: 10px 10px 25px rgba(0,0,0,0.03);
     }
     </style>
     
-    <div class="med-icon" style="top: 15%; left: 8%; font-size: 50px;">✚</div>
-    <div class="med-icon" style="top: 75%; left: 12%; font-size: 35px; color: #0047AB;">🧬</div>
-    <div class="med-icon" style="top: 25%; right: 10%; font-size: 40px;">🩺</div>
-    <div class="med-icon" style="bottom: 12%; right: 7%; font-size: 45px; color: #0047AB;">💊</div>
+    <div class="med-equip" style="top: 10%; left: 3%; font-size: 80px;">🔬</div>
+    <div class="med-equip" style="top: 40%; left: 8%; font-size: 50px; animation-duration: 10s;">🧬</div>
+    <div class="med-equip" style="bottom: 15%; left: 5%; font-size: 70px; animation-duration: 7s;">🩺</div>
+    
+    <div class="med-equip" style="top: 15%; right: 5%; font-size: 60px; animation-duration: 9s;">🏥</div>
+    <div class="med-equip" style="top: 50%; right: 7%; font-size: 90px; opacity: 0.08;">🩻</div>
+    <div class="med-equip" style="bottom: 20%; right: 4%; font-size: 55px; animation-duration: 11s;">💊</div>
+    <div class="med-equip" style="bottom: 5%; right: 45%; font-size: 40px; animation: pulse 4s infinite alternate;">❤️‍🩹</div>
     """, unsafe_allow_html=True)
 # 3. Build the UI Layout
 st.title("🏥 DermaScan AI")
