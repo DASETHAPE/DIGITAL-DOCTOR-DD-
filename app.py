@@ -8,43 +8,49 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 # 1. Configure the page settings
 st.set_page_config(page_title="DermaScan AI | Lesion Analysis", page_icon="⚕️", layout="centered")
 
-# Updated "Crystal Clear" Medical UI
+# Use a high-tech, clean medical theme (Copy and Paste this)
 st.markdown("""
     <style>
-    /* 1. Sharp Glass Effect (No more fogginess) */
+    /* 1. Base App Styling */
     .stApp {
-        background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+        background-color: #f0f4f8; /* Crisp, clean white background */
     }
-    
-    /* 2. Clearer Cards */
-    div[data-testid="stVerticalBlock"] > div:has(div.stMarkdown) {
-        background: rgba(255, 255, 255, 0.9);
+
+    /* 2. Style all text to be sharp and black */
+    h1, h2, h3, p, span, li, div.stMarkdown, div[data-testid="stMetricValue"] {
+        color: #000000 !important; /* Forces all text to be pure, readable black */
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* 3. Style the Containers (Cards) with NO BLUR */
+    div[data-testid="stVerticalBlock"] > div:has(div.stMetric) {
+        background-color: #ffffff; /* Solid white background, no transparency */
         padding: 20px;
-        border-radius: 15px;
-        border: 1px solid #bccad6;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border-radius: 12px;
+        border: 1px solid #e0e6ed;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Soft, professional shadow */
     }
 
-    /* 3. High-Definition Floating Icons */
+    /* 4. The Floating Medical Icons (Keeping them behind the text) */
     @keyframes move {
-        from { transform: translateY(0); }
-        to { transform: translateY(-20px); }
+        from { transform: translateY(0) rotate(0deg); }
+        to { transform: translateY(-30px) rotate(10deg); }
     }
 
-    .floating-icon {
+    .med-icon {
         position: fixed;
-        opacity: 0.15;
-        z-index: 0; /* Keeps them behind text */
-        animation: move 3s infinite alternate ease-in-out;
+        opacity: 0.1; /* Very subtle so it doesn't distract */
+        z-index: 0;
+        animation: move 5s infinite alternate ease-in-out;
+        color: #d1212c; /* Clinical red */
     }
     </style>
     
-    <div class="floating-icon" style="top: 15%; left: 5%; font-size: 40px;">✚</div>
-    <div class="floating-icon" style="top: 70%; left: 10%; font-size: 30px;">🧬</div>
-    <div class="floating-icon" style="top: 20%; right: 10%; font-size: 35px;">🩺</div>
-    <div class="floating-icon" style="bottom: 10%; right: 5%; font-size: 45px;">💊</div>
+    <div class="med-icon" style="top: 15%; left: 8%; font-size: 50px;">✚</div>
+    <div class="med-icon" style="top: 75%; left: 12%; font-size: 35px; color: #0047AB;">🧬</div>
+    <div class="med-icon" style="top: 25%; right: 10%; font-size: 40px;">🩺</div>
+    <div class="med-icon" style="bottom: 12%; right: 7%; font-size: 45px; color: #0047AB;">💊</div>
     """, unsafe_allow_html=True)
-
 # 3. Build the UI Layout
 st.title("🏥 DermaScan AI")
 st.subheader("Automated Skin Lesion Pre-Screening Tool")
