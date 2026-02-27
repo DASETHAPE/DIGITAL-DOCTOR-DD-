@@ -80,10 +80,8 @@ st.write("🩸 **Instructions:** Upload a clear, macroscopic, well-lit image of 
 # 4. Load the Model (Wrapped in a try-except block so the UI doesn't crash if the file is missing)
 @st.cache_resource
 def load_model():
- 
-        return tf.keras.models.load_model('skin_lesion_detector.keras')
-
-      
+    # This 'compile=False' is the secret key to fixing the ValueError
+    return tf.keras.models.load_model('skin_lesion_detector.keras', compile=False)
 
 model = load_model()
 
