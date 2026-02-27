@@ -81,6 +81,7 @@ st.markdown("""
     <div class="med-abs" style="top: 45%; left: 48%; font-size: 30px; opacity: 0.2;">✨</div>
     <div class="med-abs" style="top: 70%; left: 25%; font-size: 45px;">☣️</div>
     <div class="med-abs" style="top: 20%; left: 65%; font-size: 35px;">🦷</div>
+    """, unsafe_allow_html=True)
 # 3. Build the UI Layout
 st.title("🏥 DermaScan AI")
 st.subheader("Automated Skin Lesion Pre-Screening Tool")
