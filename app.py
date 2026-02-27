@@ -81,7 +81,7 @@ st.write("🩸 **Instructions:** Upload a clear, macroscopic, well-lit image of 
 @st.cache_resource
 def load_model():
  
-        return tf.keras.models.load_model('skin_lesion_detector.h5')
+        return tf.keras.models.load_model('skin_lesion_detector.keras')
 
       
 
