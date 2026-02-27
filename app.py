@@ -8,50 +8,41 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 # 1. Configure the page settings
 st.set_page_config(page_title="DermaScan AI | Lesion Analysis", page_icon="⚕️", layout="centered")
 
-# Custom CSS for the "Floating Medical Icons" effect
+# Updated "Crystal Clear" Medical UI
 st.markdown("""
     <style>
-    /* Floating animation */
-    @keyframes float {
-        0% { transform: translateY(0px) rotate(0deg); opacity: 0.2; }
-        50% { transform: translateY(-20px) rotate(10deg); opacity: 0.5; }
-        100% { transform: translateY(0px) rotate(0deg); opacity: 0.2; }
-    }
-
-    /* Creating the background icons using pseudo-elements */
-    .main::before {
-        content: '✚';
-        position: fixed;
-        top: 10%; left: 5%;
-        font-size: 50px;
-        color: rgba(255, 0, 0, 0.1);
-        animation: float 6s infinite ease-in-out;
-        z-index: -1;
-    }
-
-    .main::after {
-        content: '🧬';
-        position: fixed;
-        bottom: 20%; right: 10%;
-        font-size: 60px;
-        color: rgba(0, 0, 255, 0.05);
-        animation: float 8s infinite ease-in-out;
-        z-index: -1;
-    }
-
-    /* Add a few more floating spots */
+    /* 1. Sharp Glass Effect (No more fogginess) */
     .stApp {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
     }
     
-    /* Make the containers look like glass cards */
-    .stMetric, .stButton>button, .css-1r6p8d1 {
-        background: rgba(255, 255, 255, 0.7) !important;
-        backdrop-filter: blur(10px);
-        border-radius: 15px !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    /* 2. Clearer Cards */
+    div[data-testid="stVerticalBlock"] > div:has(div.stMarkdown) {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 15px;
+        border: 1px solid #bccad6;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    /* 3. High-Definition Floating Icons */
+    @keyframes move {
+        from { transform: translateY(0); }
+        to { transform: translateY(-20px); }
+    }
+
+    .floating-icon {
+        position: fixed;
+        opacity: 0.15;
+        z-index: 0; /* Keeps them behind text */
+        animation: move 3s infinite alternate ease-in-out;
     }
     </style>
+    
+    <div class="floating-icon" style="top: 15%; left: 5%; font-size: 40px;">✚</div>
+    <div class="floating-icon" style="top: 70%; left: 10%; font-size: 30px;">🧬</div>
+    <div class="floating-icon" style="top: 20%; right: 10%; font-size: 35px;">🩺</div>
+    <div class="floating-icon" style="bottom: 10%; right: 5%; font-size: 45px;">💊</div>
     """, unsafe_allow_html=True)
 
 # 3. Build the UI Layout
