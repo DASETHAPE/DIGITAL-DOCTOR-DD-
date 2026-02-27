@@ -80,10 +80,10 @@ st.write("🩸 **Instructions:** Upload a clear, macroscopic, well-lit image of 
 # 4. Load the Model (Wrapped in a try-except block so the UI doesn't crash if the file is missing)
 @st.cache_resource
 def load_model():
-    try:
+ 
         return tf.keras.models.load_model('skin_lesion_detector.h5')
-    except Exception as e:
-        return None
+
+      
 
 model = load_model()
 
