@@ -10,48 +10,46 @@ st.set_page_config(page_title="DermaScan AI | Lesion Analysis", page_icon="⚕�
 
 # Use a high-tech, clean medical theme
 # High-Density Floating Medical Equipment Field
+# Copy and replace your current CSS/Icon block with this:
 st.markdown("""
     <style>
-    .stApp {
-        background-color: #f0f4f8; 
-    }
-
-    /* Keep text sharp and high-contrast */
+    .stApp { background-color: #f0f4f8; }
     h1, h2, h3, p, b, span, div.stMarkdown {
         color: #051937 !important;
         position: relative;
-        z-index: 10; /* Ensures text stays ABOVE the floating icons */
+        z-index: 10;
     }
-
-    /* Floating Animation Variations */
-    @keyframes drift-1 { 0% { transform: translate(0,0); } 100% { transform: translate(30px, 40px); } }
-    @keyframes drift-2 { 0% { transform: translate(0,0); } 100% { transform: translate(-40px, 20px); } }
-
+    @keyframes drift {
+        0% { transform: translate(0,0) rotate(0deg); }
+        100% { transform: translate(40px, 50px) rotate(15deg); }
+    }
     .med-field {
         position: fixed;
         z-index: 0;
-        opacity: 0.18; /* Increased opacity as requested */
+        opacity: 0.25; /* Higher opacity as requested */
         user-select: none;
-        pointer-events: none; /* Icons won't block mouse clicks */
-    }
-
-    /* Clean white cards to separate UI from background */
-    [data-testid="stVerticalBlock"] > div:has(div.stMetric) {
-        background-color: rgba(255, 255, 255, 0.95);
-        border: 1px solid #d1d9e6;
-        padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        pointer-events: none;
+        animation: drift 10s infinite alternate ease-in-out;
     }
     </style>
 
-    <div class="med-field" style="top: 5%; left: 2%; font-size: 70px; animation: drift-1 10s infinite alternate;">🔬</div>
-    <div class="med-field" style="top: 25%; left: 15%; font-size: 40px; animation: drift-2 7s infinite alternate;">🧬</div>
-    <div class="med-field" style="top: 50%; left: 5%; font-size: 60px; animation: drift-1 12s infinite alternate;">🩺</div>
-    <div class="med-field" style="bottom: 10%; left: 12%; font-size: 55px; animation: drift-2 8s infinite alternate;">🏥</div>
-    <div class="med-field" style="bottom: 30%; left: 2%; font-size: 45px; animation: drift-1 9s infinite alternate;">💊</div>
-    
-    <div class="med-field" style="top: 8%; right: 10%; font-size: 50px; animation: drift-2 11
+    <div class="med-field" style="top: 5%; left: 2%; font-size: 70px;">🔬</div>
+    <div class="med-field" style="top: 25%; left: 15%; font-size: 45px;">🧬</div>
+    <div class="med-field" style="top: 50%; left: 5%; font-size: 65px;">🩺</div>
+    <div class="med-field" style="bottom: 15%; left: 10%; font-size: 80px;">🏥</div>
+    <div class="med-field" style="bottom: 40%; left: 3%; font-size: 50px;">🧪</div>
+
+    <div class="med-field" style="top: 10%; right: 5%; font-size: 60px;">🩻</div>
+    <div class="med-field" style="top: 35%; right: 12%; font-size: 90px;">🩹</div>
+    <div class="med-field" style="bottom: 10%; right: 8%; font-size: 75px;">🚑</div>
+    <div class="med-field" style="bottom: 30%; right: 2%; font-size: 55px;">💉</div>
+    <div class="med-field" style="top: 60%; right: 18%; font-size: 45px;">💊</div>
+
+    <div class="med-field" style="top: 2%; left: 45%; font-size: 40px;">🌡️</div>
+    <div class="med-field" style="bottom: 5%; left: 48%; font-size: 50px;">🧠</div>
+    <div class="med-field" style="top: 15%; left: 30%; font-size: 35px;">📋</div>
+    <div class="med-field" style="bottom: 20%; right: 40%; font-size: 45px;">❤️‍⚕️</div>
+    """, unsafe_allow_html=True)
 # 3. Build the UI Layout
 st.title("🏥 DermaScan AI")
 st.subheader("Automated Skin Lesion Pre-Screening Tool")
