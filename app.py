@@ -82,7 +82,6 @@ st.write("🩸 **Instructions:** Upload a clear, macroscopic, well-lit image of 
 def load_model():
     # This 'compile=False' is the secret key to fixing the ValueError
     return tf.keras.models.load_model('skin_lesion_detector.keras', compile=False)
-
 model = load_model()
 
 # The 7 diagnostic classes from the HAM10000 Dataset
