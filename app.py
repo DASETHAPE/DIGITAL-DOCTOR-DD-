@@ -11,45 +11,76 @@ st.set_page_config(page_title="DermaScan AI | Lesion Analysis", page_icon="⚕�
 # Use a high-tech, clean medical theme
 # High-Density Floating Medical Equipment Field
 # Copy and replace your current CSS/Icon block with this:
+# High-Density Floating Field + Upload Box Fix
 st.markdown("""
     <style>
-    .stApp { background-color: #f0f4f8; }
-    h1, h2, h3, p, b, span, div.stMarkdown {
-        color: #051937 !important;
-        position: relative;
-        z-index: 10;
+    /* 1. Global Page Background */
+    .stApp {
+        background-color: #f0f4f8;
     }
-    @keyframes drift {
+
+    /* 2. Fix the Upload Box Text Visibility */
+    [data-testid="stFileUploader"] {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        border: 2px dashed #0047AB;
+    }
+    
+    /* Ensuring all uploader text is bold black */
+    [data-testid="stFileUploader"] section div, 
+    [data-testid="stFileUploader"] label, 
+    [data-testid="stText"] {
+        color: #000000 !important;
+        font-weight: bold !important;
+    }
+
+    /* 3. High-Density Floating Field Animations */
+    @keyframes floatAround {
         0% { transform: translate(0,0) rotate(0deg); }
-        100% { transform: translate(40px, 50px) rotate(15deg); }
+        33% { transform: translate(30px, -50px) rotate(10deg); }
+        66% { transform: translate(-20px, 20px) rotate(-10deg); }
+        100% { transform: translate(0,0) rotate(0deg); }
     }
-    .med-field {
+
+    .med-abs {
         position: fixed;
         z-index: 0;
-        opacity: 0.25; /* Higher opacity as requested */
+        opacity: 0.35; /* Increased opacity for better visibility */
         user-select: none;
         pointer-events: none;
-        animation: drift 10s infinite alternate ease-in-out;
+        animation: floatAround 12s infinite ease-in-out;
+    }
+
+    /* Professional Card Styling */
+    div[data-testid="stVerticalBlock"] > div:has(div.stMetric) {
+        background-color: rgba(255, 255, 255, 0.98);
+        z-index: 10;
+        position: relative;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
     </style>
 
-    <div class="med-field" style="top: 5%; left: 2%; font-size: 70px;">🔬</div>
-    <div class="med-field" style="top: 25%; left: 15%; font-size: 45px;">🧬</div>
-    <div class="med-field" style="top: 50%; left: 5%; font-size: 65px;">🩺</div>
-    <div class="med-field" style="bottom: 15%; left: 10%; font-size: 80px;">🏥</div>
-    <div class="med-field" style="bottom: 40%; left: 3%; font-size: 50px;">🧪</div>
+    <div class="med-abs" style="top: 5%; left: 2%; font-size: 75px;">🔬</div>
+    <div class="med-abs" style="top: 25%; left: 8%; font-size: 45px; animation-delay: -2s;">🧬</div>
+    <div class="med-abs" style="top: 50%; left: 3%; font-size: 60px; animation-delay: -4s;">🩺</div>
+    <div class="med-abs" style="bottom: 15%; left: 10%; font-size: 85px; animation-delay: -6s;">🏥</div>
+    <div class="med-abs" style="bottom: 35%; left: 2%; font-size: 50px;">🧪</div>
 
-    <div class="med-field" style="top: 10%; right: 5%; font-size: 60px;">🩻</div>
-    <div class="med-field" style="top: 35%; right: 12%; font-size: 90px;">🩹</div>
-    <div class="med-field" style="bottom: 10%; right: 8%; font-size: 75px;">🚑</div>
-    <div class="med-field" style="bottom: 30%; right: 2%; font-size: 55px;">💉</div>
-    <div class="med-field" style="top: 60%; right: 18%; font-size: 45px;">💊</div>
+    <div class="med-abs" style="top: 8%; right: 5%; font-size: 65px;">🩻</div>
+    <div class="med-abs" style="top: 35%; right: 12%; font-size: 95px; animation-delay: -1s;">🩹</div>
+    <div class="med-abs" style="bottom: 10%; right: 6%; font-size: 80px; animation-delay: -3s;">🚑</div>
+    <div class="med-abs" style="bottom: 30%; right: 1%; font-size: 55px; animation-delay: -5s;">💉</div>
+    <div class="med-abs" style="top: 60%; right: 18%; font-size: 45px; animation-delay: -7s;">💊</div>
 
-    <div class="med-field" style="top: 2%; left: 45%; font-size: 40px;">🌡️</div>
-    <div class="med-field" style="bottom: 5%; left: 48%; font-size: 50px;">🧠</div>
-    <div class="med-field" style="top: 15%; left: 30%; font-size: 35px;">📋</div>
-    <div class="med-field" style="bottom: 20%; right: 40%; font-size: 45px;">❤️‍⚕️</div>
-    """, unsafe_allow_html=True)
+    <div class="med-abs" style="top: 2%; left: 30%; font-size: 40px;">🌡️</div>
+    <div class="med-abs" style="top: 15%; right: 35%; font-size: 50px;">📋</div>
+    <div class="med-abs" style="bottom: 5%; left: 45%; font-size: 55px;">🧠</div>
+    <div class="med-abs" style="bottom: 25%; right: 40%; font-size: 40px;">❤️‍⚕️</div>
+    <div class="med-abs" style="top: 45%; left: 48%; font-size: 30px; opacity: 0.2;">✨</div>
+    <div class="med-abs" style="top: 70%; left: 25%; font-size: 45px;">☣️</div>
+    <div class="med-abs" style="top: 20%; left: 65%; font-size: 35px;">🦷</div>
 # 3. Build the UI Layout
 st.title("🏥 DermaScan AI")
 st.subheader("Automated Skin Lesion Pre-Screening Tool")
