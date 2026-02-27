@@ -8,63 +8,72 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 # 1. Configure the page settings
 st.set_page_config(page_title="DermaScan AI | Lesion Analysis", page_icon="⚕️", layout="centered")
 
-# High-Saturation Field + High-Contrast UI Fix
+# 1. Total Screen Saturation & High-Contrast UI
 st.markdown("""
     <style>
-    /* 1. Reset the background for clarity */
-    .stApp {
-        background-color: #f8fafc;
-    }
+    .stApp { background-color: #f8fafc; }
 
-    /* 2. Command Center Styling (Ensures text visibility) */
-    [data-testid="stFileUploader"] {
-        background-color: #ffffff !important;
-        border: 3px solid #0047AB !important; /* Deep clinical blue border */
-        border-radius: 15px;
-        padding: 20px;
-    }
-
-    /* 3. Force all text inside the UI to be deep black */
-    h1, h2, h3, p, label, .stMarkdown, [data-testid="stFileUploadDropzone"] div {
+    /* Fix ALL text to be bold and pure black for readability */
+    h1, h2, h3, p, label, .stMarkdown, [data-testid="stText"] {
         color: #000000 !important;
-        font-weight: 700 !important; /* Bold text for maximum readability */
+        font-weight: 800 !important;
     }
 
-    /* 4. Dense Floating Equipment Field (Opacity adjusted for clarity) */
+    /* THE SCAN BUTTON: High-visibility Red */
+    div.stButton > button {
+        background-color: #d1212c !important; /* Clinical Red */
+        color: white !important;
+        font-weight: bold !important;
+        border-radius: 10px !important;
+        border: none !important;
+        width: 100%;
+        height: 50px;
+        transition: 0.3s;
+    }
+    div.stButton > button:hover {
+        background-color: #a01a22 !important;
+        transform: scale(1.02);
+    }
+
+    /* The Upload Box: Strong Border */
+    [data-testid="stFileUploader"] {
+        border: 3px solid #0047AB !important;
+        background-color: #ffffff !important;
+        border-radius: 15px;
+    }
+
+    /* DENSE FLOATING FIELD (Opacity 0.3 for high density) */
     @keyframes floatMaster {
         0% { transform: translate(0,0) rotate(0deg); }
-        50% { transform: translate(20px, -30px) rotate(5deg); }
+        50% { transform: translate(25px, -35px) rotate(8deg); }
         100% { transform: translate(0,0) rotate(0deg); }
     }
-
-    .float-item {
-        position: fixed;
-        z-index: 0;
-        opacity: 0.15; /* Slightly lowered to keep text readable */
-        pointer-events: none;
-        animation: floatMaster 8s infinite ease-in-out;
-    }
-
-    /* Solid result cards so the background icons don't bleed through */
-    div[data-testid="stVerticalBlock"] > div:has(div.stMetric) {
-        background-color: #ffffff !important;
-        border: 2px solid #cbd5e1;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        z-index: 10;
-        position: relative;
+    .med-abs {
+        position: fixed; z-index: 0; opacity: 0.3;
+        pointer-events: none; animation: floatMaster 8s infinite ease-in-out;
     }
     </style>
 
-    <div class="float-item" style="top: 5%; left: 2%; font-size: 80px;">🔬</div>
-    <div class="float-item" style="top: 25%; left: 12%; font-size: 50px; animation-delay: -2s;">🧬</div>
-    <div class="float-item" style="top: 50%; left: 4%; font-size: 70px; animation-delay: -4s;">🩺</div>
-    <div class="float-item" style="bottom: 10%; left: 8%; font-size: 90px;">🏥</div>
-    <div class="float-item" style="bottom: 30%; left: 15%; font-size: 45px;">🧪</div>
-    
-    <div class="float-item" style="top: 10%; right: 5%; font-size: 75px;">🩻</div>
-    <div class="float-item" style="top: 40%; right: 10%; font-size: 100px; animation-delay: -1s;">🩹</div>
-    <div class="float-item" style="bottom: 5%; right: 3%; font-size: 85px;">🚑</div>
-    <div class="float-item" style="bottom: 45%; right: 15%; font-size:
+    <div class="med-abs" style="top: 5%; left: 2%; font-size: 70px;">🔬</div>
+    <div class="med-abs" style="top: 25%; left: 15%; font-size: 45px;">🧬</div>
+    <div class="med-abs" style="top: 50%; left: 5%; font-size: 65px;">🩺</div>
+    <div class="med-abs" style="bottom: 10%; left: 10%; font-size: 80px;">🏥</div>
+    <div class="med-abs" style="bottom: 35%; left: 3%; font-size: 50px;">🧪</div>
+    <div class="med-abs" style="top: 70%; left: 20%; font-size: 40px;">☣️</div>
+
+    <div class="med-abs" style="top: 10%; right: 5%; font-size: 75px;">🩻</div>
+    <div class="med-abs" style="top: 35%; right: 15%; font-size: 90px;">🩹</div>
+    <div class="med-abs" style="bottom: 5%; right: 4%; font-size: 85px;">🚑</div>
+    <div class="med-abs" style="bottom: 30%; right: 1%; font-size: 55px;">💉</div>
+    <div class="med-abs" style="top: 65%; right: 20%; font-size: 45px;">💊</div>
+    <div class="med-abs" style="top: 50%; right: 8%; font-size: 40px;">🦾</div>
+
+    <div class="med-abs" style="top: 2%; left: 45%; font-size: 40px;">🌡️</div>
+    <div class="med-abs" style="bottom: 2%; right: 45%; font-size: 60px;">🧠</div>
+    <div class="med-abs" style="top: 15%; left: 30%; font-size: 35px;">📋</div>
+    <div class="med-abs" style="bottom: 20%; right: 30%; font-size: 45px;">❤️‍⚕️</div>
+    <div class="med-abs" style="top: 40%; left: 40%; font-size: 30px;">🦷</div>
+    <div class="med-abs" style="bottom: 50%; left: 48%; font-size: 35px;">🧬</div>
     """, unsafe_allow_html=True)
 # 3. Build the UI Layout
 st.title("🏥 DermaScan AI")
